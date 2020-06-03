@@ -1,0 +1,9 @@
+{
+  "name": "cnx-messaging-server",
+  "version": "0.0.1",
+  "description": "API Proxy Server for messaging ",
+  "url_bad" : "https://api.github.com/v1",
+  "template": {
+  	"forceLanguage":"en"
+  }
+}
