@@ -2,6 +2,7 @@
   "name": "cnx-messaging-server",
   "version": "0.0.1",
   "description": "API Proxy Server for messaging ",
+  "title": "Messaging API",
   "url_bad": "https://api.github.com/v1",
   "template": {
     "forceLanguage": "en"
@@ -11,8 +12,8 @@
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2020-06-03T11:53:27.003Z",
+    "time": "2020-06-05T15:50:14.737Z",
     "url": "http://apidocjs.com",
-    "version": "0.17.7"
+    "version": "0.23.0"
   }
 }
