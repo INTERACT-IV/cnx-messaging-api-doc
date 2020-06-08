@@ -1,27 +1,5 @@
 [
   {
-    "type": "architecture",
-    "url": "Architecture",
-    "title": "Main View",
-    "version": "0.0.1",
-    "group": "API_Architecture",
-    "description": "<p>This the API in its ecosystem</p> <p><img src=\"images/SMS-API-GBL.png\" alt=\"Diagramme de composants\" title=\"Architecture main view\"></p>",
-    "filename": "../cnx-messaging-server/routes.js",
-    "groupTitle": "API_Architecture",
-    "name": "ArchitectureArchitecture"
-  },
-  {
-    "type": "architecture",
-    "url": "Architecture",
-    "title": "Sequence Chart",
-    "version": "0.0.1",
-    "group": "API_Architecture",
-    "description": "<p>This the API main sequences</p> <p><img src=\"images/API_SMS_SERVER.png\" alt=\"Diagramme de sequences\" title=\"Architecture sequences\"></p>",
-    "filename": "../cnx-messaging-server/routes.js",
-    "groupTitle": "API_Architecture",
-    "name": "ArchitectureArchitecture"
-  },
-  {
     "success": {
       "fields": {
         "Success 200": [
@@ -56,7 +34,7 @@
     "version": "0.0.1",
     "group": "MESSAGES",
     "name": "messages",
-    "description": "<p>Send a message through the API to one or multiple numbers by passing parameters to the body.</p> <p><img src=\"images/SendMessage.png\" alt=\"Organigramme SendMessages\" title=\"SendMessages\"></p>",
+    "description": "<p>Send a message through the API to one or multiple numbers by passing parameters to the body.</p>",
     "parameter": {
       "fields": {
         "Body": [
@@ -65,35 +43,35 @@
             "type": "String",
             "optional": false,
             "field": "content",
-            "description": "<p>Mandatory message's content.</p>"
+            "description": "<p>Message's content.</p>"
           },
           {
             "group": "Body",
             "type": "String[]",
             "optional": false,
             "field": "numbers",
-            "description": "<p>Mandatory receiver's numbers array.</p>"
+            "description": "<p>Receiver's numbers array.</p>"
           },
           {
             "group": "Body",
             "type": "String",
             "optional": true,
             "field": "from",
-            "description": "<p>Optionnal message's sender if not given use apikey's label.</p>"
+            "description": "<p>Message's sender if not given use apikey's label.</p>"
           },
           {
             "group": "Body",
             "type": "String",
             "optional": true,
             "field": "type",
-            "description": "<p>Optionnal message's type for SMS.</p>"
+            "description": "<p>Message's type set to SMS by default.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Request example:",
-          "content": "{\n  \"content\" : \"$content\",\n  \"numbers\" : \"$numbers\",\n  \"from\" : \"$from\",\n  \"type\" : \"$type\"\n}",
+          "content": "{\n  \"content\" : \"Hello there!\",\n  \"numbers\" : [\"0033123456789\"],\n  \"from\" : \"Stark\",\n  \"type\" : \"SMS\"\n}",
           "type": "json"
         }
       ]
@@ -120,32 +98,32 @@
       "examples": [
         {
           "title": "Incompatible format response:",
-          "content": "{ error: \"Incompatible format: [ $field + $reason, … ]\" }",
+          "content": "{ \"error\": \"Incompatible format: [ $field + $reason, … ]\" }",
           "type": "json"
         },
         {
-          "title": "No sender provided response:",
-          "content": "{ error: \"Request time-out\" }",
+          "title": "Request time-out response:",
+          "content": "{ \"error\": \"Request time-out\" }",
           "type": "json"
         }
       ]
     },
     "success": {
       "fields": {
-        "Success 200": [
+        "Success": [
           {
-            "group": "Success 200",
+            "group": "Success",
             "type": "json",
             "optional": false,
-            "field": "200",
-            "description": "<p>Message broadcasting success response structure:<BR/>{ uuid: &quot;$uuid&quot; }</p>"
+            "field": "Message",
+            "description": "<p>broadcasting success response structure:<BR/>{ &quot;uuid&quot;: &quot;$uuid&quot; }</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Message broadcasting success response:",
-          "content": "{ uuid: \"32e52276-7416-41fc-98a1-636ffbb94671\" }",
+          "content": "{ \"uuid\": \"01a23456-7890-12cd-34e5-678fghi90123\" }",
           "type": "json"
         }
       ]
@@ -166,150 +144,12 @@
       },
       "examples": [
         {
-          "title": "Api example:",
-          "content": "{ \"apikey\":\"012345\" }",
-          "type": "json"
-        }
-      ]
-    }
-  },
-  {
-    "type": "POST",
-    "url": "/customer_reports",
-    "title": "Broadcasting customer's reports",
-    "version": "0.0.1",
-    "group": "REPORTS",
-    "name": "customer_reports",
-    "description": "<p>Report broadcasting through the API to one or multiple numbers.</p> <p><img src=\"images/WebhookReports.png\" alt=\"Organigramme Webhook reports\" title=\"Architecture sequences\"></p>",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "apikey",
-            "description": "<p>Service API key</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Api example:",
+          "title": "Header example:",
           "content": "{\n \"Content-Type\": \"application/json\",\n \"Accept\": \"application/json\"\n}",
           "type": "json"
         }
       ]
-    },
-    "parameter": {
-      "fields": {
-        "Body": [
-          {
-            "group": "Body",
-            "type": "String",
-            "optional": false,
-            "field": "apikey",
-            "description": "<p>Mandatory report's apikey.</p>"
-          },
-          {
-            "group": "Body",
-            "type": "String",
-            "optional": false,
-            "field": "uuid",
-            "description": "<p>Mandatory report's uuid.</p>"
-          },
-          {
-            "group": "Body",
-            "type": "String",
-            "optional": false,
-            "field": "called",
-            "description": "<p>Mandatory report message's receiver .</p>"
-          },
-          {
-            "group": "Body",
-            "type": "String",
-            "optional": false,
-            "field": "ar_status",
-            "description": "<p>Mandatory report's status.</p>"
-          },
-          {
-            "group": "Body",
-            "type": "String",
-            "optional": false,
-            "field": "ar_result",
-            "description": "<p>Mandatory report's result.</p>"
-          },
-          {
-            "group": "Body",
-            "type": "String",
-            "optional": false,
-            "field": "ar_time",
-            "description": "<p>Mandatory report's time.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request example:",
-          "content": "{\n   apikey: '$apikey', \n   uuid: '$uuid',\n   called: '$called',\n   ar_status: '$ar_status',\n   ar_result: '$ar_result',\n   ar_time: '$ar_time'\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "ErrorResponse": [
-          {
-            "group": "ErrorResponse",
-            "type": "json",
-            "optional": false,
-            "field": "400",
-            "description": "<p>Incompatible format</p>"
-          },
-          {
-            "group": "ErrorResponse",
-            "type": "json",
-            "optional": false,
-            "field": "408",
-            "description": "<p>Request time-out</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Incompatible format response:",
-          "content": "{ error: \"Incompatible format: [ $field + $reason, … ]\" }",
-          "type": "json"
-        },
-        {
-          "title": "No sender provided response:",
-          "content": "{ error: \"Request time-out\" }",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "json",
-            "optional": false,
-            "field": "200",
-            "description": "<p>Message broadcasting success response structure:<BR>{ uuid: &quot;$uuid&quot; }</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Message broadcasting success response:",
-          "content": "{}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "../cnx-messaging-server/routes.js",
-    "groupTitle": "REPORTS"
+    }
   },
   {
     "type": "get",
@@ -318,36 +158,37 @@
     "group": "REPORTS",
     "name": "reports",
     "version": "0.0.1",
+    "description": "<p>You can retrieve reports by entering specific paramters (see below), &quot;start_time&quot; and &quot;end_time&quot; being mandatory. But if you dont enter them you will retrieve all your reports from the last 30 days.</p>",
     "parameter": {
       "fields": {
         "Query": [
           {
             "group": "Query",
             "type": "String",
-            "optional": true,
+            "optional": false,
             "field": "start_time",
-            "description": "<p>Mandatory start of search range. The interval between each date have to be of 1 month or less</p>"
+            "description": "<p>Start of search range. The interval between each date have to be of 1 month or less</p>"
           },
           {
             "group": "Query",
             "type": "String",
-            "optional": true,
+            "optional": false,
             "field": "end_time",
-            "description": "<p>Mandatory end of search range. The interval between each date have to be of 1 month or less</p>"
+            "description": "<p>End of search range. The interval between each date have to be of 1 month or less</p>"
           },
           {
             "group": "Query",
             "type": "String",
             "optional": true,
             "field": "called",
-            "description": "<p>Optionnal message's receiver number.</p>"
+            "description": "<p>Message's receiver number.</p>"
           },
           {
             "group": "Query",
             "type": "String",
             "optional": true,
             "field": "status",
-            "description": "<p>Optionnal message's status.</p>"
+            "description": "<p>Message's status.</p>"
           },
           {
             "group": "Query",
@@ -355,7 +196,7 @@
             "optional": true,
             "field": "count",
             "defaultValue": "100",
-            "description": "<p>Optionnal maximum amount of reports received. Must be less than 100 .</p>"
+            "description": "<p>Maximum amount of reports received. Must be less than 100 .</p>"
           },
           {
             "group": "Query",
@@ -363,7 +204,7 @@
             "optional": true,
             "field": "page",
             "defaultValue": "1",
-            "description": "<p>Optionnal number of page set to 1 .</p>"
+            "description": "<p>Number of page set to 1 .</p>"
           },
           {
             "group": "Query",
@@ -371,14 +212,14 @@
             "optional": true,
             "field": "apikey_restricted",
             "defaultValue": "false",
-            "description": "<p>Optionnal restrict reports viewed to your apikey project only, set to false.</p>"
+            "description": "<p>Restrict reports viewed to your apikey project only, set to false.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Request Example:",
-          "content": "GET /reports?uuid=9075c582-368e-4efe-867b-48bf76d2007a&called=0033629020559&start_time=2020-05-21&end_time=2020-06-18&status=null&count=100&page=1&apikey_restricted=false HTTP/1.1",
+          "content": "GET /reports?uuid=01a23456-7890-12cd-34e5-678fghi90123&called=0033629020559&start_time=2020-05-21&end_time=2020-06-18&status=null&count=100&page=1&apikey_restricted=false",
           "type": "json"
         }
       ]
@@ -390,6 +231,13 @@
             "group": "Error Response",
             "type": "json",
             "optional": false,
+            "field": "404",
+            "description": "<p>If the reports you're asking doesn't exist, you'll get a<BR/> &quot;Request not found&quot; response satus</p>"
+          },
+          {
+            "group": "Error Response",
+            "type": "json",
+            "optional": false,
             "field": "408",
             "description": "<p>Request time-out</p>"
           }
@@ -397,7 +245,12 @@
       },
       "examples": [
         {
-          "title": "No sender provided response:",
+          "title": "Request not found response:",
+          "content": "{}",
+          "type": "json"
+        },
+        {
+          "title": "Request time-out response:",
           "content": "{ error: \"Request time-out\" }",
           "type": "json"
         }
@@ -405,20 +258,20 @@
     },
     "success": {
       "fields": {
-        "Success 200": [
+        "Success": [
           {
-            "group": "Success 200",
+            "group": "Success",
             "type": "json",
             "optional": false,
             "field": "200",
-            "description": "<p>Customer reports recovery response structure:<BR/> {<BR/> count,<BR/> rows : [{<BR/> &quot;uuid&quot;: &quot;$uuid&quot;,<BR/> &quot;called&quot;: &quot;$called&quot;,<BR/> &quot;ar_status&quot;: &quot;$ar_status&quot;,<BR/> &quot;ar_result&quot;: &quot;$ar_result&quot;,<BR/> &quot;ar_time&quot;: &quot;$ar_time&quot;,<BR/> &quot;send_time&quot;: &quot;$send_time&quot;,<BR/> &quot;status&quot;: &quot;$status&quot;<BR/> }, ... ]<BR/> }</p>"
+            "description": "<p>Customer reports recovery response structure:<BR/> {<BR/> &quot;count&quot;: &quot;$count&quot;,<BR/> &quot;rows&quot; : [{<BR/> &quot;uuid&quot;: &quot;$uuid&quot;,<BR/> &quot;called&quot;: &quot;$called&quot;,<BR/> &quot;ar_status&quot;: &quot;$ar_status&quot;,<BR/> &quot;ar_result&quot;: &quot;$ar_result&quot;,<BR/> &quot;ar_time&quot;: &quot;$ar_time&quot;,<BR/> &quot;send_time&quot;: &quot;$send_time&quot;,<BR/> &quot;status&quot;: &quot;$status&quot;<BR/> }, ... ]<BR/> }</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Customer reports recovery response:",
-          "content": "{\n  count,\n  rows : [{\n    \"uuid\": \"32e52276-7486-41fc-98a1-638ffbb94671\",\n    \"called\": \"003312346789\",\n    \"ar_status\": \"1\",\n    \"ar_result\": \"Delivered\",\n    \"ar_time\": \"2020-06-04T11:38:15.000Z\",\n    \"send_time\": \"2020-06-04T11:38:11.000Z\",\n    \"status\": \"Retrying\"\n  }]\n}",
+          "content": "{\n  \"count\": 1,\n  \"rows\" : [{\n    \"uuid\": \"01a23456-7890-12cd-34e5-678fghi90123\",\n    \"called\": \"003312346789\",\n    \"ar_status\": \"Delivered\",\n    \"ar_result\": \"Delivered\",\n    \"ar_time\": \"2020-06-04T11:38:15.000Z\",\n    \"send_time\": \"2020-06-04T11:38:11.000Z\",\n    \"status\": \"Retrying\"\n  }]\n}",
           "type": "json"
         }
       ]
@@ -439,11 +292,133 @@
       },
       "examples": [
         {
-          "title": "Api example:",
-          "content": "{ \"apikey\":\"012345\" }",
+          "title": "Header example:",
+          "content": "{\n \"Content-Type\": \"application/json\",\n \"Accept\": \"application/json\"\n}",
           "type": "json"
         }
       ]
     }
+  },
+  {
+    "type": "POST",
+    "url": "http://$webhook_path",
+    "title": "Broadcasting customer's reports",
+    "version": "0.0.1",
+    "group": "WEBHOOK",
+    "name": "webhook",
+    "description": "<p>Report broadcasting through the API to one or multiple numbers.</p>",
+    "header": {
+      "examples": [
+        {
+          "title": "Api example:",
+          "content": "{\n \"Content-Type\": \"application/json\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "apikey",
+            "description": "<p>Report's apikey.</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "uuid",
+            "description": "<p>Report's uuid.</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "called",
+            "description": "<p>Report message's receiver .</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "ar_status",
+            "description": "<p>Report's status.</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "ar_result",
+            "description": "<p>Report's result.</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "ar_time",
+            "description": "<p>Report's time.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request example:",
+          "content": "{\n   \"apikey\": \"$apikey\", \n   \"uuid\": \"$uuid\",\n   \"called\": \"$called\",\n   \"ar_status\": $ar_status,\n   \"ar_result\": $ar_result,\n   \"ar_time\": $ar_time\n   \"send_time\": $send_time\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "ErrorResponse": [
+          {
+            "group": "ErrorResponse",
+            "type": "json",
+            "optional": false,
+            "field": "400",
+            "description": "<p>If this error occurs, the request will be launch at regular intervals.</p>"
+          },
+          {
+            "group": "ErrorResponse",
+            "type": "json",
+            "optional": false,
+            "field": "408",
+            "description": "<p>Request time-out</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "No sender provided response:",
+          "content": "{ error: \"Request time-out\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success": [
+          {
+            "group": "Success",
+            "type": "json",
+            "optional": false,
+            "field": "Message",
+            "description": "<p>broadcasting success response structure:<BR>{ uuid: &quot;$uuid&quot; }</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Message broadcasting success response:",
+          "content": "{}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "../cnx-messaging-server/routes.js",
+    "groupTitle": "WEBHOOK"
   }
 ]
