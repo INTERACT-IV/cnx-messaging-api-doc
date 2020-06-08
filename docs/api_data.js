@@ -251,7 +251,7 @@ define({ "api": [
         },
         {
           "title": "Request time-out response:",
-          "content": "{ error: \"Request time-out\" }",
+          "content": "{ \"error\": \"Request time-out\" }",
           "type": "json"
         }
       ]
@@ -366,7 +366,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request example:",
-          "content": "{\n   \"apikey\": \"$apikey\", \n   \"uuid\": \"$uuid\",\n   \"called\": \"$called\",\n   \"ar_status\": $ar_status,\n   \"ar_result\": $ar_result,\n   \"ar_time\": $ar_time\n   \"send_time\": $send_time\n}",
+          "content": "{\n   \"apikey\": \"$apikey\", \n   \"uuid\": \"$uuid\",\n   \"called\": \"$called\",\n   \"ar_status\": \"$ar_status\",\n   \"ar_result\":\"$ar_result\",\n   \"ar_time\": \"$ar_time\",\n   \"send_time\": \"$send_time\"\n}",
           "type": "json"
         }
       ]
@@ -393,7 +393,7 @@ define({ "api": [
       "examples": [
         {
           "title": "No sender provided response:",
-          "content": "{ error: \"Request time-out\" }",
+          "content": "{ \"error\": \"Request time-out\" }",
           "type": "json"
         }
       ]
