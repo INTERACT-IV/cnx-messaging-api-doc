@@ -6,7 +6,7 @@ define({ "api": [
     "version": "0.0.1",
     "group": "API_Architecture",
     "name": "Architecture_API_Ecosystem",
-    "description": "<p>This is the API in its ecosystem.</p> <p><img src=\"images/HLA-cnx-messaging-server.png\" alt=\"Higl Level Architecture\"></p>",
+    "description": "<p>This is the API in its ecosystem.</p> <p><img src=\"images/HLA-cnx-messaging-server.png\" alt=\"High Level Architecture\"></p>",
     "filename": "../cnx-messaging-server/routes.js",
     "groupTitle": "API_Architecture"
   },
@@ -150,16 +150,23 @@ define({ "api": [
             "optional": false,
             "field": "apikey",
             "description": "<p>Service API key</p>"
+          },
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Content-Type",
+            "description": "<p>MIME type value</p>"
+          },
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Accept",
+            "description": "<p>Which content types, expressed as MIME types, the client is able to understand</p>"
           }
         ]
-      },
-      "examples": [
-        {
-          "title": "Header example:",
-          "content": "{\n \"Content-Type\": \"application/json\",\n \"Accept\": \"application/json\"\n}",
-          "type": "json"
-        }
-      ]
+      }
     }
   },
   {
@@ -292,16 +299,23 @@ define({ "api": [
             "optional": false,
             "field": "apikey",
             "description": "<p>Service API key</p>"
+          },
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Content-Type",
+            "description": "<p>MIME type value</p>"
+          },
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Accept",
+            "description": "<p>Which content types, expressed as MIME types, the client is able to understand</p>"
           }
         ]
-      },
-      "examples": [
-        {
-          "title": "Header example:",
-          "content": "{\n \"Content-Type\": \"application/json\",\n \"Accept\": \"application/json\"\n}",
-          "type": "json"
-        }
-      ]
+      }
     }
   },
   {
@@ -313,13 +327,17 @@ define({ "api": [
     "name": "webhook",
     "description": "<p>Report broadcasting through the API to one or multiple numbers.</p>",
     "header": {
-      "examples": [
-        {
-          "title": "Api example:",
-          "content": "{\n \"Content-Type\": \"application/json\"\n}",
-          "type": "json"
-        }
-      ]
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Content-Type",
+            "description": "<p>MIME type value</p>"
+          }
+        ]
+      }
     },
     "parameter": {
       "fields": {
