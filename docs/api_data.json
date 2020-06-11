@@ -2,7 +2,7 @@
   {
     "type": "architecture",
     "url": "Architecture",
-    "title": "Higl Level Architecture",
+    "title": "High Level Architecture",
     "version": "0.0.1",
     "group": "API_Architecture",
     "name": "Architecture_API_Ecosystem",
