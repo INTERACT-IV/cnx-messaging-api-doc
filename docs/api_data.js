@@ -3,7 +3,7 @@ define({ "api": [
     "type": "architecture",
     "url": "Architecture",
     "title": "High Level Architecture",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "group": "API_Architecture",
     "name": "Architecture_API_Ecosystem",
     "description": "<p>This is the API in its ecosystem.</p> <p><img src=\"images/HLA-cnx-messaging-server.png\" alt=\"High Level Architecture\"></p>",
@@ -42,7 +42,7 @@ define({ "api": [
     "type": "post",
     "url": "/messages",
     "title": "Broadcasting messages",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "group": "MESSAGES",
     "name": "messages",
     "description": "<p>Send a message through the API to one or multiple numbers by passing parameters to the body.</p>",
@@ -68,7 +68,7 @@ define({ "api": [
             "type": "String",
             "optional": true,
             "field": "from",
-            "description": "<p>Message's sender if not given use apikey's label.</p>"
+            "description": "<p>Message's sender can be a number or if not given the apikey's label.</p>"
           },
           {
             "group": "Body",
@@ -156,14 +156,14 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Content-Type",
-            "description": "<p>MIME type value</p>"
+            "description": "<p>Application/json</p>"
           },
           {
             "group": "Header",
             "type": "String",
             "optional": false,
             "field": "Accept",
-            "description": "<p>Which content types, expressed as MIME types, the client is able to understand</p>"
+            "description": "<p>Application/json</p>"
           }
         ]
       }
@@ -175,8 +175,8 @@ define({ "api": [
     "title": "Customer reports recovery",
     "group": "REPORTS",
     "name": "reports",
-    "version": "0.0.1",
-    "description": "<p>You can retrieve reports by entering specific paramters (see below), &quot;start_time&quot; and &quot;end_time&quot; being mandatory. But if you dont enter them you will retrieve all your reports from the last 30 days.</p>",
+    "version": "1.0.0",
+    "description": "<p>You can retrieve reports by entering specific paramters at any time (see below), &quot;start_time&quot; and &quot;end_time&quot; being mandatory. But if you dont enter them you will retrieve all your reports from the last 30 days. <img src=\"images/HLA-cnx-messaging-server.png\" alt=\"High Level Architecture\"></p>",
     "parameter": {
       "fields": {
         "Query": [
@@ -198,6 +198,13 @@ define({ "api": [
             "group": "Query",
             "type": "String",
             "optional": true,
+            "field": "uuid",
+            "description": "<p>Message batch identifier. To retrieve a message corresponding to a specific number, you must specify the latter.</p>"
+          },
+          {
+            "group": "Query",
+            "type": "String",
+            "optional": true,
             "field": "called",
             "description": "<p>Message's receiver number.</p>"
           },
@@ -213,8 +220,7 @@ define({ "api": [
             "type": "String",
             "optional": true,
             "field": "count",
-            "defaultValue": "100",
-            "description": "<p>Maximum amount of reports received. Must be less than 100 .</p>"
+            "description": "<p>Amount of reports received.<BR/>If it isn't set, it will return all available reports that match other selected paramaters.</p>"
           },
           {
             "group": "Query",
@@ -222,7 +228,7 @@ define({ "api": [
             "optional": true,
             "field": "page",
             "defaultValue": "1",
-            "description": "<p>Number of page set to 1 .</p>"
+            "description": "<p>Number of page set to 1.<BR/>If it isn't set, it will return all available reports that match other selected paramaters.</p>"
           },
           {
             "group": "Query",
@@ -236,8 +242,43 @@ define({ "api": [
       },
       "examples": [
         {
-          "title": "Request Example:",
-          "content": "GET /reports?uuid=01a23456-7890-12cd-34e5-678fghi90123&called=0033629020559&start_time=2020-05-21&end_time=2020-06-18&status=null&count=100&page=1&apikey_restricted=false",
+          "title": "Request Example with all parameters:",
+          "content": "GET /reports?uuid=01a23456-7890-12cd-34e5-678fghi90123&called=0033123456789&start_time=2020-05-21&end_time=2020-06-18&status=Accepted&count=100&page=1&apikey_restricted=false",
+          "type": "json"
+        },
+        {
+          "title": "Request Example on specific time range (The only mandatory parameters):",
+          "content": "GET /reports?start_time=2020-05-21&end_time=2020-06-18",
+          "type": "json"
+        },
+        {
+          "title": "Request Example on specific time range for a specific message batch:",
+          "content": "GET /reports?start_time=2020-05-21&end_time=2020-06-18&uuid=01a23456-7890-12cd-34e5-678fghi90123",
+          "type": "json"
+        },
+        {
+          "title": "Request Example on specific time range for a unique number on a specific message batch:",
+          "content": "GET /reports?start_time=2020-05-21&end_time=2020-06-18&uuid=01a23456-7890-12cd-34e5-678fghi90123&called=0033123456789",
+          "type": "json"
+        },
+        {
+          "title": "Request Example on specific time range for a specific status on a message batch:",
+          "content": "GET /reports?start_time=2020-05-21&end_time=2020-06-18&status=Accepted",
+          "type": "json"
+        },
+        {
+          "title": "Request Example on specific time range for 3 pages (will return all available reports on those pages):",
+          "content": "GET /reports?start_time=2020-05-21&end_time=2020-06-18&page=3",
+          "type": "json"
+        },
+        {
+          "title": "Request Example on specific time range for 25 first reports:",
+          "content": "GET /reports?start_time=2020-05-21&end_time=2020-06-18&count=25",
+          "type": "json"
+        },
+        {
+          "title": "Request Example on specific time range for a specific api key on a message batch (if not set, it will returned all customer's apikey related report batch):",
+          "content": "GET /reports?start_time=2020-05-21&end_time=2020-06-18&apikey_restricted=true",
           "type": "json"
         }
       ]
@@ -305,14 +346,14 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Content-Type",
-            "description": "<p>MIME type value</p>"
+            "description": "<p>Application/json</p>"
           },
           {
             "group": "Header",
             "type": "String",
             "optional": false,
             "field": "Accept",
-            "description": "<p>Which content types, expressed as MIME types, the client is able to understand</p>"
+            "description": "<p>Application/json</p>"
           }
         ]
       }
@@ -322,10 +363,10 @@ define({ "api": [
     "type": "POST",
     "url": "http://$webhook_path",
     "title": "Broadcasting customer's reports",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "group": "WEBHOOK",
     "name": "webhook",
-    "description": "<p>Report broadcasting through the API to one or multiple numbers.</p>",
+    "description": "<p>Report broadcasting through the API to one or multiple numbers. The webhook is hosted by the client. <img src=\"images/HLA-cnx-messaging-server.png\" alt=\"High Level Architecture\"></p>",
     "header": {
       "fields": {
         "Header": [
@@ -334,7 +375,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Content-Type",
-            "description": "<p>MIME type value</p>"
+            "description": "<p>Application/json</p>"
           }
         ]
       }
@@ -354,7 +395,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "uuid",
-            "description": "<p>Report's uuid.</p>"
+            "description": "<p>Report batch's uuid.</p>"
           },
           {
             "group": "Body",
