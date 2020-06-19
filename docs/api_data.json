@@ -176,7 +176,7 @@
     "group": "REPORTS",
     "name": "reports",
     "version": "1.0.0",
-    "description": "<p>You can retrieve reports by entering specific paramters at any time (see below), &quot;start_time&quot; and &quot;end_time&quot; being mandatory. But if you dont enter them you will retrieve all your reports from the last 30 days. <img src=\"images/HLA-cnx-messaging-server.png\" alt=\"High Level Architecture\"></p>",
+    "description": "<p>You can retrieve reports by entering specific paramters at any time (see below), a valid apikey, &quot;start_time&quot; and &quot;end_time&quot; being mandatory. But if you dont enter them you will retrieve all your reports from the last 30 days. <img src=\"images/HLA-cnx-messaging-server-reports.png\" alt=\"High Level Architecture\"></p>",
     "parameter": {
       "fields": {
         "Query": [
@@ -366,7 +366,7 @@
     "version": "1.0.0",
     "group": "WEBHOOK",
     "name": "webhook",
-    "description": "<p>Report broadcasting through the API to one or multiple numbers. The webhook is hosted by the client. <img src=\"images/HLA-cnx-messaging-server.png\" alt=\"High Level Architecture\"></p>",
+    "description": "<p>Report broadcasting through the API to one or multiple numbers, implementation to receive reports is the responsibility of the customer. The webhook is hosted by the client. <img src=\"images/HLA-cnx-messaging-server.png\" alt=\"High Level Architecture\"></p>",
     "header": {
       "fields": {
         "Header": [
